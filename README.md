@@ -1,7 +1,7 @@
 # ShortLink
 
 A modern URL shortener built with **Python, Flask, and SQLite**.  
-LinkSleek lets users create short links from long URLs, use custom aliases, track clicks, and manage links from a dashboard.
+ShortLink lets users create short links from long URLs, use custom aliases, track clicks, and manage links from a dashboard.
 
 ---
 
