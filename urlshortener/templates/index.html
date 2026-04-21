@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-copy">
+        <span class="eyebrow">Create a link</span>
+        <h1>Shorten your links with a more polished workflow.</h1>
+        <p class="subtitle">Create custom aliases, keep your dashboard tidy, and review link performance from one focused place.</p>
+        <div class="hero-badges">
+            <span class="badge"><i data-lucide="sparkles"></i> Custom aliases</span>
+            <span class="badge"><i data-lucide="bar-chart-3"></i> Click analytics</span>
+            <span class="badge"><i data-lucide="shield-check"></i> Clean structure</span>
+        </div>
+    </div>
+</section>
+
+<section class="glass-card shorten-box">
+    <div class="section-header">
+        <div>
+            <span class="section-kicker">Create a link</span>
+            <h2 class="section-title">Turn a long URL into something easy to share.</h2>
+        </div>
+    </div>
+    <form method="POST" action="{{ url_for('main.index') }}" class="url-form">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label>Paste your long URL</label>
+            <div class="input-wrapper">
+                <i data-lucide="link"></i>
+                {{ form.original_url(placeholder="https://example.com/very-long-url-goes-here", class="input-field") }}
+            </div>
+            {% for error in form.original_url.errors %}
+                <span class="error-text">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group">
+            <label>Custom alias <span class="label-note">(optional)</span></label>
+            <div class="input-wrapper">
+                <i data-lucide="at-sign"></i>
+                {{ form.custom_alias(placeholder="my-cool-link", class="input-field") }}
+            </div>
+            <p class="helper-text">Use letters, numbers, hyphens, or underscores.</p>
+            {% for error in form.custom_alias.errors %}
+                <span class="error-text">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+</section>
+
+<section class="stats-grid">
+    <div class="stat-card">
+        <span class="stat-icon"><i data-lucide="link-2"></i></span>
+        <h3>{{ stats.total_links }}</h3>
+        <p>Links Created</p>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon"><i data-lucide="mouse-pointer-click"></i></span>
+        <h3>{{ stats.total_clicks }}</h3>
+        <p>Total Clicks</p>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon"><i data-lucide="activity"></i></span>
+        <h3>Live</h3>
+        <p>Dashboard Status</p>
+    </div>
+</section>
+{% endblock %}

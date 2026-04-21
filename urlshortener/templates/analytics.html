@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <span class="eyebrow">Performance view</span>
+        <h1 class="page-title">Analytics overview</h1>
+        <p class="page-description">Track overall usage, see which links are getting attention, and spot top performers at a glance.</p>
+    </div>
+</section>
+
+<section class="stats-grid">
+    <div class="stat-card">
+        <span class="stat-icon"><i data-lucide="link-2"></i></span>
+        <h3>{{ stats.total_links }}</h3>
+        <p>Total Links Created</p>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon"><i data-lucide="mouse-pointer-click"></i></span>
+        <h3>{{ stats.total_clicks }}</h3>
+        <p>Total Clicks</p>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon"><i data-lucide="award"></i></span>
+        <h3>{{ stats.top_links[0].short_code if stats.top_links else 'N/A' }}</h3>
+        <p>Top Performing Link</p>
+    </div>
+</section>
+
+<section class="glass-card analytics-card">
+    <div class="section-header">
+        <div>
+            <span class="section-kicker">Top 5 links</span>
+            <h2 class="section-title">Most clicked links right now.</h2>
+        </div>
+    </div>
+    <div class="top-links-list">
+        {% for url in stats.top_links %}
+        <div class="top-link-item">
+            <div class="link-info">
+                <span class="rank">#{{ loop.index }}</span>
+                <div>
+                    <span class="code">/{{ url.short_code }}</span>
+                    <span class="orig">{{ url.original_url[:60] }}{% if url.original_url|length > 60 %}...{% endif %}</span>
+                </div>
+            </div>
+            <div class="link-stats">
+                <span class="clicks">{{ url.clicks }} clicks</span>
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-panel compact">
+            <i data-lucide="bar-chart-3"></i>
+            <h3>No data available yet</h3>
+            <p>Once links start getting clicks, the top performers will appear here.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

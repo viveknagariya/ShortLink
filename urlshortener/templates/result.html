@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="glass-card result-card">
+    <div class="result-hero">
+        <span class="success-icon"><i data-lucide="check-circle-2"></i></span>
+        <span class="eyebrow success">Link created successfully</span>
+        <h1>Your short link is ready.</h1>
+        <p class="subtitle">Copy it now or keep it for later in your dashboard.</p>
+    </div>
+
+    <div class="url-display">
+        <div class="url-display-label">Short URL</div>
+        <div class="url-display-row">
+            <input type="text" id="shortUrl" value="{{ config.SHORT_URL_DOMAIN }}/{{ url.short_code }}" readonly>
+            <button type="button" onclick="copyToClipboard()" id="copyBtn" class="btn-copy">
+                <i data-lucide="copy"></i> Copy
+            </button>
+        </div>
+    </div>
+
+    <div class="meta-grid">
+        <div class="meta-item">
+            <span class="meta-label">Original URL</span>
+            <a href="{{ url.original_url }}" target="_blank" rel="noopener noreferrer">{{ url.original_url }}</a>
+        </div>
+        <div class="meta-item">
+            <span class="meta-label">Short code</span>
+            <strong>/{{ url.short_code }}</strong>
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Create another</a>
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline">Go to dashboard</a>
+    </div>
+</section>
+
+<script>
+    function copyToClipboard() {
+        var copyText = document.getElementById("shortUrl");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+        
+        var btn = document.getElementById("copyBtn");
+        btn.innerHTML = '<i data-lucide="check"></i> Copied!';
+        lucide.createIcons();
+        
+        setTimeout(() => {
+            btn.innerHTML = '<i data-lucide="copy"></i> Copy';
+            lucide.createIcons();
+        }, 2000);
+    }
+</script>
+{% endblock %}

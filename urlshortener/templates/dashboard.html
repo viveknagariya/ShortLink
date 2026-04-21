@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <span class="eyebrow">Link management</span>
+        <h1 class="page-title">Your shortened links</h1>
+        <p class="page-description">Review all saved links, copy them quickly, and remove anything you no longer need.</p>
+    </div>
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary btn-small">New link</a>
+</section>
+
+<section class="glass-card table-container">
+    <div class="table-shell">
+        <table class="link-table">
+            <thead>
+                <tr>
+                    <th>Short URL</th>
+                    <th>Original URL</th>
+                    <th>Clicks</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for url in urls %}
+                <tr>
+                    <td>
+                        <div class="short-code-box">
+                            <a href="{{ url_for('main.redirect_to_url', short_code=url.short_code) }}" target="_blank" rel="noopener noreferrer">
+                                /{{ url.short_code }}
+                            </a>
+                        </div>
+                    </td>
+                    <td class="original-url-cell">
+                        <span title="{{ url.original_url }}">{{ url.original_url }}</span>
+                    </td>
+                    <td>
+                        <span class="click-badge">{{ url.clicks }}</span>
+                    </td>
+                    <td>{{ url.created_at.strftime('%b %d, %Y') }}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <form action="{{ url_for('main.delete_url', url_id=url.id) }}" method="POST" onsubmit="return confirm('Delete this link?')">
+                                <button type="submit" class="btn-delete" title="Delete">
+                                    <i data-lucide="trash-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="empty-state">
+                        <div class="empty-panel">
+                            <i data-lucide="inbox"></i>
+                            <h3>No links created yet</h3>
+                            <p>Start by shortening your first URL from the home page.</p>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
