@@ -17,7 +17,6 @@ def index():
         if error:
             flash(error, 'danger')
         elif url_obj:
-            # Data is committed in service, render result
             return render_template('result.html', url=url_obj)
         else:
             flash('Unknown error occurred.', 'danger')

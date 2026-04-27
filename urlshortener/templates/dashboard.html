@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="page-header">
+<section class="page-header dashboard-header">
     <div>
-        <span class="eyebrow">Link management</span>
         <h1 class="page-title">Your shortened links</h1>
         <p class="page-description">Review all saved links, copy them quickly, and remove anything you no longer need.</p>
     </div>
     <a href="{{ url_for('main.index') }}" class="btn btn-primary btn-small">New link</a>
 </section>
 
-<section class="glass-card table-container">
+<section class="glass-card table-container dashboard-table">
     <div class="table-shell">
         <table class="link-table">
             <thead>
@@ -36,7 +35,7 @@
                         <span title="{{ url.original_url }}">{{ url.original_url }}</span>
                     </td>
                     <td>
-                        <span class="click-badge">{{ url.clicks }}</span>
+                        {{ url.clicks }}
                     </td>
                     <td>{{ url.created_at.strftime('%b %d, %Y') }}</td>
                     <td>

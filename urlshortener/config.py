@@ -34,5 +34,4 @@ class Config:
         }
     }
 
-    # Keep this aligned with the actual local server
     SHORT_URL_DOMAIN = os.environ.get("SHORT_URL_DOMAIN") or "http://127.0.0.1:5000"

@@ -1,36 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="page-header">
+<section class="page-header analytics-header">
     <div>
-        <span class="eyebrow">Performance view</span>
         <h1 class="page-title">Analytics overview</h1>
         <p class="page-description">Track overall usage, see which links are getting attention, and spot top performers at a glance.</p>
-    </div>
-</section>
-
-<section class="stats-grid">
-    <div class="stat-card">
-        <span class="stat-icon"><i data-lucide="link-2"></i></span>
-        <h3>{{ stats.total_links }}</h3>
-        <p>Total Links Created</p>
-    </div>
-    <div class="stat-card">
-        <span class="stat-icon"><i data-lucide="mouse-pointer-click"></i></span>
-        <h3>{{ stats.total_clicks }}</h3>
-        <p>Total Clicks</p>
-    </div>
-    <div class="stat-card">
-        <span class="stat-icon"><i data-lucide="award"></i></span>
-        <h3>{{ stats.top_links[0].short_code if stats.top_links else 'N/A' }}</h3>
-        <p>Top Performing Link</p>
     </div>
 </section>
 
 <section class="glass-card analytics-card">
     <div class="section-header">
         <div>
-            <span class="section-kicker">Top 5 links</span>
             <h2 class="section-title">Most clicked links right now.</h2>
         </div>
     </div>
